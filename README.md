@@ -2,7 +2,7 @@
 
 This is a work in progress. This project assumes that you are using the C/C++ SDK for the Pico. I am using VS Code on Manjaro Linux. I compile my code on an attached Raspberry Pi Zero (where the SDK is installed and my project code lives).
 
-I wanted to create a command line interpreter for the Raspberry Pi Pico (rp2040) with the idea that a programmer could simply add code into a couple "C" source files, recompile, and the programmer would be able to run those commands in a pseudo shell like environment.
+I wanted to create a command line interpreter for the Raspberry Pi Pico (rp2040) with the idea that a programmer could simply add code into a couple "C" source files, recompile, and the programmer would be able to run those commands in a pseudo shell like environment. The idea could be used to create your own REPL if you wanted.
 
 As an example, suppose I wanted to test several routines that I wrote to use different sensors. Instead of having several programs, I could have just one and use commands to execute them. If I wanted to blink an LED on a certain pin, I could run a command like the following from the command line interpreter:
 ```
