@@ -11,7 +11,7 @@ OK
 $
 ```
 
-The programmer defines a routine in a "C" source file (user_funcs.c) and accompanying header file (user_funcs.h) like:
+The programmer defines a routine in a "C" source file (user_funcs.c) and accompanying header file (user_funcs.h).
 
 This would be added to the file user_funcs.c
 ```
@@ -31,7 +31,7 @@ void blink_led(char tokens[][MAX_STRING_SIZE]) {
   } // end for
 }
 ```
-The parameters are passed in as an array of string tokens. These are the arguments to the command line command. The command name is tokens[0]. In the example code above, the arguments are the LED pin, the number of times to blink, and the duration of the blink (in milliseconds).
+The parameters are passed in as an array of string tokens. The tokens are gathered in the main program, but the programmer shouldn't worry about this. These are the arguments to the command line command. The command name is tokens[0]. In the example code above, the arguments are the LED pin, the number of times to blink, and the duration of the blink (in milliseconds).
 
 The command blink_led also has to be added to an intialization routine. The two pieces of information are the command name and the function name.
 
