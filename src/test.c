@@ -36,9 +36,10 @@ usr_funcs user_functions[MAX_USER_FUNCTIONS];
 
 int main() {
   int len;
+  int exit_flag = 0;
   int token_cnt = 0;
   char tokens[NUMBER_OF_STRING][MAX_STRING_SIZE];
-  char buffer[BUF_SIZE];
+  char buffer[BUF_SIZE], prev_buffer[BUF_SIZE];
   char str[80];
 
   setup_uart();
@@ -51,23 +52,57 @@ int main() {
 
   while (true) {
     // console prompt
+    console_putc('\n');
     console_putc('$');
 
     // get command from the console
     len = console_gets(buffer, 128);
 
+    if (len == -1) { // dealing with up arrow - previous buffer
+      //for future
+    } //end if
+
+    strcpy(prev_buffer, buffer);
+   
     // split the command into tokens
     token_cnt = parse_string(buffer, tokens, " ");
-
     if (token_cnt > 0) {
       // loop through the user defined functions and execute
       // one if found
       for (int i = 0; i < MAX_USER_FUNCTIONS; i++) {
+        //presumably end of user functions
+        if (strcmp(user_functions[i].command_name, "") == 0)
+          break;
 
+        //display help
+        if (strcmp(user_functions[i].command_name, tokens[0]) == 0) {
+          if ((strcmp(tokens[1], "-h") == 0) ||
+              (strcmp(tokens[1], "--help") == 0)) {
+            sprintf(str, "\n%s\n", user_functions[i].command_help);
+            console_puts(str);
+            break;
+          } // end if
+        } // end if
+
+        //list the user-defined functions
+        if (strcmp("list", tokens[0]) == 0) {
+          sprintf(str, "\n%s\n", user_functions[i].command_name);
+          console_puts(str);
+        } //end if
+
+        //quit the console loop
+        if (strcmp("quit", tokens[0]) == 0) {
+          console_puts("\nGood bye.\n");
+          exit_flag = 1;
+          break;
+        } //end if
+
+        //execute the command function
         if (strcmp(user_functions[i].command_name, tokens[0]) == 0) {
           user_functions[i].user_function(tokens);
+          break;
         } // end if
-      }   // end if
+      } // end for
     }     // end if
 
     console_puts("\n");
@@ -77,6 +112,9 @@ int main() {
     buffer[0] = '\0';
     for (int i = 0; i < token_cnt; i++)
       tokens[i][0] = '\0';
+
+    if (exit_flag == 1)
+        break;
   } // end while
 
 } // end main
