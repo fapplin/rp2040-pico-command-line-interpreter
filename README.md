@@ -92,6 +92,7 @@ void calc(char tokens[][MAX_STRING_SIZE]);
 This should be all the programmer has to worry about. Run the make command in the build directory and then copy the .uf2 file to the Pico. The command line interpreter should start to run with the prompt "$" waiting for you to type a command to run. There is a list command to list the user-defined functions. Just for fun, I added a calc command, which uses the TINYEXPR - Tiny recursive descent parser and evaluation engine in C. So, you can do things like:
 
 $calc sqrt(1256)+1256^3
+
 1.981385e+09
 
 OK
