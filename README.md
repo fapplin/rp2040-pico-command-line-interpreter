@@ -50,7 +50,7 @@ void blink_led(char tokens[][MAX_STRING_SIZE]) {
 ```
 The parameters are passed in as an array of string tokens. The tokens are gathered in the main program, but the programmer shouldn't worry about this. These are the arguments to the command line command. The command name is tokens[0]. In the example code above, the arguments are the LED pin - tokens[1], the number of times to blink - tokens[2], and the duration of the blink (in milliseconds) - tokens[3].
 
-The command blink_led also has to be added to an intialization routine. The two pieces of information are the command name and the function name.
+The command blink_led also has to be added to an intialization routine. The three pieces of information are the command name, command help, and the function name.
 
 This also needs modifying in user_funcs.c
 ```
