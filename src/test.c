@@ -1,8 +1,8 @@
 #include "console.h"
 #include "user_funcs.h"
 
-#include "hardware/irq.h"
-#include "hardware/uart.h"
+// #include "hardware/irq.h"
+// #include "hardware/uart.h"
 #include "pico/stdlib.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +22,7 @@
 #define NUMBER_OF_STRING 10
 #define MAX_STRING_SIZE 25
 
-void setup_uart();
+// void setup_uart();
 void console_putc(char c);
 char console_getc(void);
 void console_puts(char *s);
@@ -42,13 +42,15 @@ int main() {
   char buffer[BUF_SIZE], prev_buffer[BUF_SIZE];
   char str[80];
 
-  setup_uart();
+  stdio_init_all();
+
+  // setup_uart();
 
   // initialize the user functions
   init_user_functions();
 
   // clears the console
-  uart_puts(UART_ID, "\e[1;1H\e[2J");
+  printf("\e[1;1H\e[2J");
 
   while (true) {
     // console prompt
@@ -134,6 +136,7 @@ int parse_string(char *str, char tokens[][MAX_STRING_SIZE], char *delim) {
 
 } // end parse_string
 
+/*
 void setup_uart() {
   // Set up our UART with a basic baud rate.
   uart_init(UART_ID, 115200);
@@ -160,3 +163,4 @@ void setup_uart() {
   uart_set_translate_crlf(UART_ID, true);
 
 } // end setup_uart
+*/
